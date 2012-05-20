@@ -3,6 +3,11 @@ package com.unitedmindset.extensions.flightmode
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	
+	/**
+	 * Created for Default-iness. 
+	 * @author jonbcampos
+	 * 
+	 */	
 	public class FlightMode extends EventDispatcher
 	{
 		public function FlightMode()

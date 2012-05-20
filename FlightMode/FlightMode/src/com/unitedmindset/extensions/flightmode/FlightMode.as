@@ -5,8 +5,18 @@ package com.unitedmindset.extensions.flightmode
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 	
+	/**
+	 * Fired when the FlightMode changes on the device
+	 * due to any other application or internal change. 
+	 */
 	[Event(name="connectivityChange", type="com.unitedmindset.extensions.flightmode.FlightModeEvent")]
 	
+	/**
+	 * FlightMode ANE class to give information
+	 * about the Device's connectivity. 
+	 * @author jonbcampos
+	 * 
+	 */	
 	public class FlightMode extends EventDispatcher
 	{
 		//---------------------------------------------------------------------
@@ -45,6 +55,9 @@ package com.unitedmindset.extensions.flightmode
 		//  Public Methods
 		//
 		//---------------------------------------------------------------------
+		/**
+		 * Registers the ANE with the Native Process.
+		 */		
 		public function register():void
 		{
 			if(!_context)
@@ -57,6 +70,9 @@ package com.unitedmindset.extensions.flightmode
 			}
 		}
 		
+		/**
+		 * Deregisters and disconnects the ANE from the Native Process.
+		 */		
 		public function deregister():void
 		{
 			if(_registered)
@@ -68,11 +84,23 @@ package com.unitedmindset.extensions.flightmode
 			}
 		}
 		
+		/**
+		 * Let's you know if ANE is supported.
+		 * For now, just returns <code>true</code>. 
+		 * @return 
+		 * 
+		 */		
 		public static function isSupported():Boolean
 		{
 			return true;
 		}
 		
+		/**
+		 * Returns <code>true</code> if Airplane Mode is on 
+		 * and <code>false</code> if Airplane Mode is off. 
+		 * @return 
+		 * 
+		 */		
 		public function isAirplaneModeOn():Boolean
 		{
 			if(!_registered)
@@ -80,6 +108,11 @@ package com.unitedmindset.extensions.flightmode
 			return _context.call(IS_AIRPLANE_MODE_ON_FUNC) as Boolean;
 		}
 		
+		/**
+		 * Sets Airplane Mode on or off depending on value input. 
+		 * @param value
+		 * 
+		 */		
 		public function setAirplaneMode(value:Boolean):void
 		{
 			if(!_registered)

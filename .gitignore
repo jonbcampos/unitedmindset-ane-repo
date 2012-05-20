@@ -13,10 +13,12 @@ bin-release/
 **/.metadata
 **/.actionScriptProperties
 **/*.DS_Store
-**/.flexLibProperties
+**/*/.flexLibProperties
 **/.project
 **/.settings
 **/cert.p12
 
 **/.classPath
 **/.project
+
+**/*/bin

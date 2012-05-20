@@ -7,3 +7,16 @@ bin-release/
 .flexProperties
 .settings/
 .project
+.metadata
+
+#subprojects
+**/.metadata
+**/.actionScriptProperties
+**/.DS_Store
+**/.flexLibProperties
+**/.project
+**/.settings
+**/cert.p12
+
+**/.classPath
+**/.project

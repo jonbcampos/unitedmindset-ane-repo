@@ -4,7 +4,13 @@ package com.unitedmindset.extensions.applicationfinder
 	import com.unitedmindset.extensions.applicationfinder.vos.PackageInfo;
 	
 	import flash.external.ExtensionContext;
-
+	/**
+	 * ANE that provides Package and Application
+	 * Information from the Device.
+	 *  
+	 * @author jonbcampos
+	 * 
+	 */	
 	public class ApplicationFinder
 	{
 		private var _context:ExtensionContext;
@@ -24,6 +30,9 @@ package com.unitedmindset.extensions.applicationfinder
 			
 		}
 		
+		/**
+		 * Registers the ANE with the Native Process.
+		 */		
 		public function register():void
 		{
 			if(!_context)
@@ -33,6 +42,9 @@ package com.unitedmindset.extensions.applicationfinder
 			_registered = true;
 		}
 		
+		/**
+		 * Deregisters the ANE with the Native Process.
+		 */		
 		public function dispose():void
 		{
 			if(_registered)
@@ -42,38 +54,83 @@ package com.unitedmindset.extensions.applicationfinder
 			_context = null;
 		}
 		
+		/**
+		 * Denotes if the device supports this feature. 
+		 * @return 
+		 * 
+		 */		
 		public static function isSupported():Boolean{ return true; }
 		
+		/**
+		 * Returns the application information for a specific uri.
+		 * Returns <code>null</code> if no application exists 
+		 * on the device.
+		 *  
+		 * @param uri
+		 * @return 
+		 * 
+		 */		
 		public function getApplicationInfo(uri:String):ApplicationInfo
 		{
 			if(!_registered) register();
 			return _context.call(GET_APPLICATION_INFO, uri) as ApplicationInfo;
 		}
 		
+		/**
+		 * Returns the package information for a specific uri.
+		 * Returns <code>null</code> if no package exists 
+		 * on the device.
+		 *  
+		 * @param uri
+		 * @return 
+		 * 
+		 */
 		public function getPackageInfo(uri:String):PackageInfo
 		{
 			if(!_registered) register();
 			return _context.call(GET_PACKAGE_INFO, uri) as PackageInfo;
 		}
 		
+		/**
+		 * Returns a list of all the installed applications
+		 * on the device.
+		 *  
+		 * @return 
+		 * 
+		 */		
 		public function getInstalledApplications():Array
 		{
 			if(!_registered) register();
 			return _context.call(GET_INSTALLED_APPLICATIONS) as Array;
 		}
 		
+		/**
+		 * Returns a list of all the installed packages
+		 * on the device.
+		 *  
+		 * @return 
+		 * 
+		 */		
 		public function getInstalledPackages():Array
 		{
 			if(!_registered) register();
 			return _context.call(GET_INSTALLED_PACKAGES) as Array;
 		}
 		
+		/**
+		 * Was trying to come up with a way to pull
+		 * the icon from the system. Incomplete.
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		/*
 		public function getIconById(id:String):Object
 		{
 			if(!_registered) register();
 			var obj:Object = _context.call(GET_ICON_BY_ID);
 			return obj;
 		}
-		
+		*/
 	}
 }

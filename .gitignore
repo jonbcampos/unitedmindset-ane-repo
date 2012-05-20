@@ -18,7 +18,7 @@ bin-release/
 **/.settings
 **/cert.p12
 
-**/.classPath
+**/*/.classpath
 **/.project
 
 **/*/bin

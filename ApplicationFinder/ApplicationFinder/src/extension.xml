@@ -1,0 +1,16 @@
+<extension xmlns="http://ns.adobe.com/air/extension/3.1">
+	<id>com.unitedmindset.extensions.ApplicationFinder</id>
+	<versionNumber>1.1.0</versionNumber>
+	<platforms>
+		<platform name="Android-ARM">
+			<applicationDeployment>
+				<nativeLibrary>ApplicationFinder.jar</nativeLibrary>
+				<initializer>com.unitedmindset.applicationfinder.extensions.ApplicationFinderExtension</initializer>
+				<finalizer>com.unitedmindset.applicationfinder.extensions.ApplicationFinderExtension</finalizer>
+			</applicationDeployment>
+		</platform>
+		<platform name="default">
+			<applicationDeployment/>
+       </platform>
+	</platforms>
+</extension>

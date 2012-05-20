@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">ApplicationFinder ANE Test App</string>
+    <string name="app_name">ApplicationFinderANE</string>
+    <string name="get_apps">Get Apps</string>
+    <string name="get_packages">Get Packages</string>
+
+</resources>

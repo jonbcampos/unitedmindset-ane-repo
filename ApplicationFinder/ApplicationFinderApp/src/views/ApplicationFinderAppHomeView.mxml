@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="App Finder"
+		viewActivate="view1_viewActivateHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.unitedmindset.extensions.applicationfinder.ApplicationFinder;
+			import com.unitedmindset.extensions.applicationfinder.vos.ApplicationInfo;
+			import com.unitedmindset.extensions.applicationfinder.vos.PackageInfo;
+			
+			import mx.collections.ArrayList;
+			
+			import spark.events.ViewNavigatorEvent;
+			
+			private var _appFinder:ApplicationFinder;
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				var installed:ApplicationInfo = _appFinder.getApplicationInfo( appIdInput.text );
+				appIdInput.setStyle("color", (installed)?0x00FF00:0xFF0000 );
+			}
+			
+			protected function button4_clickHandler(event:MouseEvent):void
+			{
+				var installed:PackageInfo = _appFinder.getPackageInfo( appIdInput.text );
+				appIdInput.setStyle("color", (installed)?0x00FF00:0xFF0000 );
+			}
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				var array:Array = _appFinder.getInstalledApplications();
+				list.dataProvider = new ArrayList( array );
+			}
+			
+			protected function button3_clickHandler(event:MouseEvent):void
+			{
+				var array:Array = _appFinder.getInstalledPackages();
+				list.dataProvider = new ArrayList( array );
+			}
+			
+			protected function view1_viewActivateHandler(event:ViewNavigatorEvent):void
+			{
+				if(!_appFinder) _appFinder = new ApplicationFinder();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout gap="10"/>
+	</s:layout>
+	
+	<s:titleContent>
+		<s:TextInput id="appIdInput" width="100%" prompt="enter app id"/>
+	</s:titleContent>
+	<s:actionContent>
+		<s:Button label="Check App"
+				  click="button1_clickHandler(event)"/>
+		<s:Button label="Check Pack"
+				  click="button4_clickHandler(event)"/>
+		<s:Button label="Get Apps"
+				  click="button2_clickHandler(event)"/>
+		<s:Button label="Get Packages"
+				  click="button3_clickHandler(event)"/>
+	</s:actionContent>
+	
+	<s:List width="100%" height="100%" id="list" labelField="applicationName"/>
+	
+</s:View>

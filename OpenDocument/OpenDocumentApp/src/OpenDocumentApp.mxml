@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark">
+	<fx:Script>
+		<![CDATA[
+			import com.unitedmindset.extensions.opendocument.OpenDocument;
+			protected function openDocButton_clickHandler(event:MouseEvent):void
+			{
+				var open:OpenDocument = new OpenDocument();
+				var file:File = File.applicationDirectory.resolvePath("assets/test.doc");
+				file.copyTo( File.applicationStorageDirectory.resolvePath("test.doc"), true );
+				var copyFile:File = File.applicationStorageDirectory.resolvePath("test.doc");
+				open.openDocument( copyFile.nativePath, copyFile.extension );
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Button label="Open Doc" id="openDocButton"
+			  click="openDocButton_clickHandler(event)"/>
+</s:Application>

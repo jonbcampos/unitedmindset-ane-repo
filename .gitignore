@@ -12,6 +12,7 @@ bin-release/
 #subprojects
 **/.metadata
 **/.actionScriptProperties
+*.DS_Store
 **/*.DS_Store
 **/*/.flexLibProperties
 **/.project

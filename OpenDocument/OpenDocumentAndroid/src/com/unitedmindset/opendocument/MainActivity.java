@@ -1,12 +1,7 @@
 package com.unitedmindset.opendocument;
 
-import java.io.File;
-import java.io.IOException;
-
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Menu;
 
 public class MainActivity extends Activity {

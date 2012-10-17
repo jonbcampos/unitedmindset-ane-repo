@@ -27,7 +27,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.unitedmindset.extensions.flightmode
 {
 	import flash.events.EventDispatcher;
-	import flash.events.IEventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 	
@@ -40,6 +39,13 @@ package com.unitedmindset.extensions.flightmode
 	/**
 	 * FlightMode ANE class to give information
 	 * about the Device's connectivity. 
+	 * 
+	 * Required Permissions To Add:
+	 * <pre>
+	 * &lt;uses-permission android:name="android.permission.WRITE_SETTINGS"/&gt;
+	 * &lt;uses-permission android:name="android.permission.READ_PHONE_STATE"/&gt;
+	 * </pre>
+	 * 
 	 * @author jonbcampos
 	 * 
 	 */	
@@ -153,10 +159,13 @@ package com.unitedmindset.extensions.flightmode
 		//---------------------------------------------------------------------
 		private function _onStatus_changeHandler(event:StatusEvent):void
 		{
+			var inAirplaneMode:Boolean = (event.level == "true")?true:false;
+			
+			//fire off a change event
 			if(event.code == FlightModeEvent.CONNECTIVITY_CHANGE)
 			{
-				var inAirplaneMode:Boolean = true;
-				dispatchEvent(new FlightModeEvent(FlightModeEvent.CONNECTIVITY_CHANGE, inAirplaneMode));
+				if(hasEventListener(FlightModeEvent.CONNECTIVITY_CHANGE))
+					dispatchEvent(new FlightModeEvent(FlightModeEvent.CONNECTIVITY_CHANGE, inAirplaneMode));
 			}
 		}
 	}

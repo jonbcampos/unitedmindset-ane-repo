@@ -39,7 +39,7 @@ public class FlightModeContext extends FREContext {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-
+		connectivityListener = null;
 	}
 
 	@Override
@@ -65,5 +65,5 @@ public class FlightModeContext extends FREContext {
 	{
 		return connectivityListener;
 	}
-
+	
 }

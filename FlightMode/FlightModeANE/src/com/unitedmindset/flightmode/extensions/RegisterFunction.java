@@ -38,10 +38,12 @@ public class RegisterFunction implements FREFunction {
 
 	public FREObject call(FREContext context, FREObject[] args) {
 		
-		
 		FlightModeContext c = (FlightModeContext)context;
 		Activity activity = c.getActivity();
 		
+		/*
+		 * Airplane Mode Changed
+		 */
 		IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
 		
 		FlightModeListener listener = new FlightModeListener();

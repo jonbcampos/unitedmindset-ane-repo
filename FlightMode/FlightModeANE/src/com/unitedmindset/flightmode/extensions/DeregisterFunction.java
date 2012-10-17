@@ -39,12 +39,14 @@ public class DeregisterFunction implements FREFunction
 		
 		FlightModeContext c = (FlightModeContext)context;
 		Activity activity = c.getActivity();
+		
 		FlightModeListener listener = c.getConnectivityListener();
 		if(listener!=null)
 		{
 			activity.unregisterReceiver(listener);
 			c.setConnectivityListener(null);
 		}
+		
 		return null;
 	}
 

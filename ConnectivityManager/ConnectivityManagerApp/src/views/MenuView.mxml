@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="Menu"
+		viewActivate="view1_viewActivateHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.unitedmindset.extensions.connectivitymanager.ConnectivityManager;
+			import com.unitedmindset.extensions.connectivitymanager.WifiManager;
+			import com.unitedmindset.extensions.connectivitymanager.events.ConnectivityEvent;
+			
+			import spark.events.IndexChangeEvent;
+			import spark.events.ViewNavigatorEvent;
+			
+			protected function list_changeHandler(event:IndexChangeEvent):void
+			{
+				var data:Object = list.selectedItem;
+				var result:Object;
+				switch(data.label)
+				{
+					case "getActiveNetworkInfo":
+						result = _connectivityManager.getActiveNetworkInfo();
+						break;
+					case "getAllActiveNetworkInfo":
+						result = _connectivityManager.getAllNetworkInfo();
+						break;
+					case "getNetworkInfo":
+						//result = _connectivityManager.getNetworkInfo( 0 );
+						result = "ignored";
+						break;
+					case "getNetworkPreference":
+						result = _connectivityManager.getNetworkPreference();
+						break;
+					case "isNetworkTypeValid(ConnectivityManager.TYPE_MOBILE)":
+						result = _connectivityManager.isNetworkTypeValid( ConnectivityManager.TYPE_MOBILE );
+						break;
+					case "requestRouteToHost":
+						//result = _connectivityManager.requestRouteToHost(0, 0);
+						result = "ignored";
+						break;
+					case "setNetworkPreference":
+						//result = _connectivityManager.setNetworkPreference(0);
+						result = "ignored";
+						break;
+					case "startUsingNetworkFeature":
+						//result = _connectivityManager.startUsingNetworkFeature(0, "");
+						result = "ignored";
+						break;
+					case "stopUsingNetworkFeature":
+						//result = _connectivityManager.stopUsingNetworkFeature(0, "");
+						result = "ignored";
+						break;
+					case "calculateSignalLevel":
+						//result = _wifiManager.calculateSignalLevel(0, 0);
+						result = "ignored";
+						break;
+					case "compareSignalLevel":
+						//result = _wifiManager.compareSignalLevel(0, 0);
+						result = "ignored";
+						break;
+					case "disableNetwork":
+						//result = _wifiManager.disableNetwork(0);
+						result = "ignored";
+						break;
+					case "disconnect":
+						result = _wifiManager.disconnect();
+						break;
+					case "enableNetwork":
+						//_wifiManager.enableNetwork(0, 0);
+						result = "ignored";
+						break;
+					case "getConfiguredNetworks":
+						result = _wifiManager.getConfiguredNetworks();
+						break;
+					case "getConnectionInfo":
+						result = _wifiManager.getConnectionInfo();
+						break;
+					case "getDhcpInfo":
+						result = _wifiManager.getDhcpInfo();
+						break;
+					case "getScanResults":
+						result = _wifiManager.getScanResults();
+						break;
+					case "getWifiState":
+						result = _wifiManager.getWifiState();
+						break;
+					case "isWifiEnabled":
+						result = _wifiManager.isWifiEnabled();
+						break;
+					case "pingSupplicant":
+						result = _wifiManager.pingSupplicant();
+						break;
+					case "reassociate":
+						result = _wifiManager.reassociate();
+						break;
+					case "reconnect":
+						result = _wifiManager.reconnect();
+						break;
+					case "removeNetwork":
+						//result = _wifiManager.removeNetwork(0);
+						result = "ignored";
+						break;
+					case "saveConfiguration":
+						result = _wifiManager.saveConfiguration();
+						break;
+					case "setWifiEnabled(true)":
+						result = _wifiManager.setWifiEnabled(true);
+						break;
+					case "setWifiEnabled(false)":
+						result = _wifiManager.setWifiEnabled(false);
+						break;
+					case "startScan":
+						result = _wifiManager.startScan();
+						break;
+					case "launchWifiSettings":
+						_wifiManager.launchWifiSettings();
+						break;
+					default:
+						break;
+				}
+				trace(result);
+			}
+			
+			private var _connectivityManager:ConnectivityManager;
+			private var _wifiManager:WifiManager;
+			protected function view1_viewActivateHandler(event:ViewNavigatorEvent):void
+			{
+				if(ConnectivityManager.isSupported() && !_connectivityManager)
+				{
+					_connectivityManager = new ConnectivityManager();
+					_connectivityManager.register();
+					_connectivityManager.addEventListener(ConnectivityEvent.CONNECTIVITY_CHANGE, _onConnectivityManager_connectionChangeHandler);
+				}
+				if(WifiManager.isSupported() && !_wifiManager)
+				{
+					_wifiManager = new WifiManager();
+					_wifiManager.register();
+					_wifiManager.addEventListener(ConnectivityEvent.WIFI_SCAN_CHANGE, _onWifiManager_connectionChangeHandler);
+					_wifiManager.addEventListener(ConnectivityEvent.WIFI_CHANGE, _onWifiManager_connectionChangeHandler);
+				}
+			}
+			
+			private function _onConnectivityManager_connectionChangeHandler(event:ConnectivityEvent):void
+			{
+				trace(event.type);
+			}
+			
+			private function _onWifiManager_connectionChangeHandler(event:ConnectivityEvent):void
+			{
+				trace(event.type);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:List width="100%" height="100%" id="list"
+			change="list_changeHandler(event)">
+		<s:dataProvider>
+			<s:ArrayList>
+				<fx:Object label="Connectivity Manager"/>
+				<fx:Object label="getActiveNetworkInfo"/>
+				<fx:Object label="getAllActiveNetworkInfo"/>
+				<fx:Object label="getNetworkInfo"/>
+				<fx:Object label="getNetworkPreference"/>
+				<fx:Object label="isNetworkTypeValid(ConnectivityManager.TYPE_MOBILE)"/>
+				<fx:Object label="requestRouteToHost"/>
+				<fx:Object label="setNetworkPreference"/>
+				<fx:Object label="startUsingNetworkFeature"/>
+				<fx:Object label="stopUsingNetworkFeature"/>
+				<fx:Object label=" "/>
+				<fx:Object label="Wifi Manager"/>
+				<fx:Object label="calculateSignalLevel"/>
+				<fx:Object label="compareSignalLevel"/>
+				<fx:Object label="disableNetwork"/>
+				<fx:Object label="disconnect"/>
+				<fx:Object label="enableNetwork"/>
+				<fx:Object label="getConfiguredNetworks"/>
+				<fx:Object label="getConnectionInfo"/>
+				<fx:Object label="getDhcpInfo"/>
+				<fx:Object label="getScanResults"/>
+				<fx:Object label="getWifiState"/>
+				<fx:Object label="isWifiEnabled"/>
+				<fx:Object label="pingSupplicant"/>
+				<fx:Object label="reassociate"/>
+				<fx:Object label="reconnect"/>
+				<fx:Object label="removeNetwork"/>
+				<fx:Object label="saveConfiguration"/>
+				<fx:Object label="setWifiEnabled(true)"/>
+				<fx:Object label="setWifiEnabled(false)"/>
+				<fx:Object label="startScan"/>
+				<fx:Object label="launchWifiSettings"/>
+			</s:ArrayList>
+		</s:dataProvider>
+	</s:List>
+</s:View>

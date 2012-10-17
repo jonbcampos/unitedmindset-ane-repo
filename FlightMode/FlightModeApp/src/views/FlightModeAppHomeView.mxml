@@ -23,7 +23,7 @@
 			
 			private function _onFlightMode_connectionChangedHandler(event:FlightModeEvent):void
 			{
-				airplaneModeToggleSwitch.selected = _flightMode.isAirplaneModeOn();
+				airplaneModeToggleSwitch.selected = event.inAirplaneMode;
 			}
 			
 			protected function view1_viewActivateHandler(event:ViewNavigatorEvent):void
@@ -32,10 +32,13 @@
 				{
 					checked = true;
 					
-					_flightMode = new FlightMode();
-					_flightMode.register();
-					_flightMode.addEventListener(FlightModeEvent.CONNECTIVITY_CHANGE, _onFlightMode_connectionChangedHandler);
-					airplaneModeToggleSwitch.selected = _flightMode.isAirplaneModeOn();
+					if(!_flightMode)
+					{
+						_flightMode = new FlightMode();
+						_flightMode.register();
+						_flightMode.addEventListener(FlightModeEvent.CONNECTIVITY_CHANGE, _onFlightMode_connectionChangedHandler);
+						airplaneModeToggleSwitch.selected = _flightMode.isAirplaneModeOn();
+					}
 				} else {
 					checkAirplaneModeButton.enabled = false;
 					checkAirplaneModeButton.label = "Not Supported";
@@ -54,8 +57,8 @@
 				{
 					_flightMode.deregister();
 					_flightMode.removeEventListener(FlightModeEvent.CONNECTIVITY_CHANGE, _onFlightMode_connectionChangedHandler);
-					_flightMode = null;
 				}
+				_flightMode = null;
 			}
 			
 		]]>

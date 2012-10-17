@@ -45,7 +45,7 @@ public class FlightModeListener extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		Boolean inAirplaneMode = intent.getBooleanExtra("state", false);
 		String s = (inAirplaneMode)?"true":"false";
-		freContext.dispatchStatusEventAsync("connectivityChange", s);
+		freContext.dispatchStatusEventAsync("connectivityChanging", s);
 	}
 
 }

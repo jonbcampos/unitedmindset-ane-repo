@@ -8,13 +8,13 @@ import android.net.wifi.WifiManager;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
-import com.unitedmindset.connectivitymanager.extensions.ConnectivityManagerContext;
+import com.unitedmindset.connectivitymanager.extensions.WifiManagerContext;
 
 public class RegisterFunction implements FREFunction {
 
 	public FREObject call(FREContext context, FREObject[] args) {
 		
-		ConnectivityManagerContext cmc = (ConnectivityManagerContext) context;
+		WifiManagerContext cmc = (WifiManagerContext) context;
 		Activity activity = cmc.getActivity();
 		cmc.wifiManager = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);
 		

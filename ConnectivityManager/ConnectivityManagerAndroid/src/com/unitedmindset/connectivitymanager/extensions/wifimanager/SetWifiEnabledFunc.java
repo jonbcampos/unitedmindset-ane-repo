@@ -8,13 +8,13 @@ import com.adobe.fre.FREInvalidObjectException;
 import com.adobe.fre.FREObject;
 import com.adobe.fre.FRETypeMismatchException;
 import com.adobe.fre.FREWrongThreadException;
-import com.unitedmindset.connectivitymanager.extensions.ConnectivityManagerContext;
+import com.unitedmindset.connectivitymanager.extensions.WifiManagerContext;
 
 public class SetWifiEnabledFunc implements FREFunction {
 
 	public FREObject call(FREContext context, FREObject[] args) {
 		
-		ConnectivityManagerContext c = (ConnectivityManagerContext) context;
+		WifiManagerContext c = (WifiManagerContext) context;
 		WifiManager w = c.wifiManager;
 		
 		boolean enabled = convertFreObjectToBoolean(args[0]);

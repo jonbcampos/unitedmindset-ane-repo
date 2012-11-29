@@ -31,13 +31,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 		<delete dir="${DEFAULT_STORAGE}" includeemptydirs="true"/>
 		<mkdir dir="${DEFAULT_STORAGE}"/>
 		
-		<antcall target="-build-jar"/>
-		<!-- -->
 		<!--
+		<antcall target="-build-jar"/>
+		-->
+		<!-- -->
 		<copy file="${ANE_MAIN}/${ANE_NAME}-Master.jar" 
 			tofile="${ANDROID_STORAGE}/${ANE_NAME}.jar"
 			overwrite="true"/>
-		-->
 		
 		<!-- prep android dependencies -->
 		<unzip dest="${ANDROID_STORAGE}" src="${SWC}"/>

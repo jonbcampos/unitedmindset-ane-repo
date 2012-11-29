@@ -81,7 +81,7 @@ package com.unitedmindset.extensions.opendocument
 		 */		
 		public static function isSupported():Boolean
 		{
-			return true;
+			return false;
 		}
 		
 		public function openDocument(path:String, extension:String):void

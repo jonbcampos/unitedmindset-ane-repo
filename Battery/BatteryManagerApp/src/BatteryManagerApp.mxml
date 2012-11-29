@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   applicationComplete="application1_applicationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.unitedmindset.extensions.batterymanager.BatteryEvent;
+			import com.unitedmindset.extensions.batterymanager.BatteryManager;
+			
+			import mx.events.FlexEvent;
+			
+			private var _ane:BatteryManager;
+			
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				if(BatteryManager.isSupported())
+				{
+					_ane = new BatteryManager();
+					_ane.addEventListener(BatteryEvent.BATTERY_CHANGED, _onEvent);
+					_ane.register();
+				}
+			}
+			
+			private function _onEvent(event:BatteryEvent):void
+			{
+				label.text = event.toString() + " isPresent: " +event.isPresent+
+					" technology: "+event.technology+
+					" plugged: "+event.plugged+
+					" scale: "+event.scale+
+					" health: "+event.health+
+					" status: "+event.status+
+					" rawLevel: "+event.rawLevel+
+					" temperature: "+event.temperature+
+					" voltage: "+event.voltage;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Label id="label" width="100%"/>
+</s:Application>

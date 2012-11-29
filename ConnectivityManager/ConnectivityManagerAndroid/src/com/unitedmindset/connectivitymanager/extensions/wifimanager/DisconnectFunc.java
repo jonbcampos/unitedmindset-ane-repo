@@ -6,13 +6,13 @@ import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
 import com.adobe.fre.FREWrongThreadException;
-import com.unitedmindset.connectivitymanager.extensions.ConnectivityManagerContext;
+import com.unitedmindset.connectivitymanager.extensions.WifiManagerContext;
 
 public class DisconnectFunc implements FREFunction {
 
 	public FREObject call(FREContext context, FREObject[] args) {
 		
-		ConnectivityManagerContext c = (ConnectivityManagerContext) context;
+		WifiManagerContext c = (WifiManagerContext) context;
 		WifiManager w = c.wifiManager;
 		
 		Boolean result = w.disconnect();

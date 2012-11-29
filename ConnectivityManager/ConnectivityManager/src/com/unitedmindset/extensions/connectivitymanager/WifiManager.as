@@ -252,7 +252,10 @@ package com.unitedmindset.extensions.connectivitymanager
 					break;
 				case ConnectivityEvent.WIFI_CHANGE:
 					if(hasEventListener(ConnectivityEvent.WIFI_CHANGE))
-						dispatchEvent(new ConnectivityEvent(ConnectivityEvent.WIFI_CHANGE, event.level));
+					{
+						var wifiState:int = getWifiState();
+						dispatchEvent(new ConnectivityEvent(ConnectivityEvent.WIFI_CHANGE, wifiState));
+					}
 					break;
 				default:
 					//do nothing

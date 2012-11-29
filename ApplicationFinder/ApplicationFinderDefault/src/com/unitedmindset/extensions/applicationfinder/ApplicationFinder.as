@@ -28,8 +28,6 @@ package com.unitedmindset.extensions.applicationfinder
 {
 	import com.unitedmindset.extensions.applicationfinder.vos.PackageInfo;
 	
-	import flash.external.ExtensionContext;
-
 	public class ApplicationFinder
 	{
 		public function ApplicationFinder()

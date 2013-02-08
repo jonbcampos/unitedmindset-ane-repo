@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   applicationComplete="application1_applicationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.unitedmindset.extensions.wakelock.WakeLock;
+			
+			import mx.events.FlexEvent;
+			
+			private var _wakeLock:WakeLock;
+			
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				if(WakeLock.isSupported())
+				{
+					_wakeLock = new WakeLock();
+					_wakeLock.register(WakeLock.SCREEN_DIM_WAKE_LOCK, "test", false);
+				}
+			}
+			
+			protected function acquireButton_clickHandler(event:MouseEvent):void
+			{
+				if(_wakeLock)
+					_wakeLock.acquire();
+			}
+			
+			protected function releaseButton_clickHandler(event:MouseEvent):void
+			{
+				if(_wakeLock)
+					_wakeLock.release();
+			}
+			
+			protected function goToSleepButton_clickHandler(event:MouseEvent):void
+			{
+				if(_wakeLock)
+					_wakeLock.goToSleep();
+			}
+			
+			protected function isScreenOnButton_clickHandler(event:MouseEvent):void
+			{
+				if(_wakeLock)
+				{
+					var value:Boolean = _wakeLock.isScreenOn();
+				}
+			}
+			
+			protected function isHeldButton_clickHandler(event:MouseEvent):void
+			{
+				if(_wakeLock)
+				{
+					var value:Boolean = _wakeLock.isHeld();
+				}
+			}
+			
+			protected function getScreenTimeoutButton_clickHandler(event:MouseEvent):void
+			{
+				if(_wakeLock)
+				{
+					var value:int = _wakeLock.getScreenTimeout();
+				}
+			}
+			
+			protected function setScreenTimeoutButton_clickHandler(event:MouseEvent):void
+			{
+				if(_wakeLock)
+				{
+					_original = _wakeLock.getScreenTimeout();
+					_wakeLock.setScreenTimeout(2000);
+				}
+			}
+			
+			private var _original:int;
+			protected function resetScreenTimeoutButton_clickHandler(event:MouseEvent):void
+			{
+				if(_wakeLock)
+				{
+					_wakeLock.setScreenTimeout(60000);
+				}
+			}
+			
+			protected function zeroScreenTimeoutButton_clickHandler(event:MouseEvent):void
+			{
+				_original = _wakeLock.getScreenTimeout();
+				_wakeLock.setScreenTimeout(0);
+				//_wakeLock.setScreenTimeout(_original);
+			}
+			
+			protected function keepScreenOnButton_clickHandler(event:MouseEvent):void
+			{
+				if(_wakeLock)
+					_wakeLock.keepScreenOn();
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout paddingBottom="20" paddingLeft="20"
+						  paddingRight="20" paddingTop="20"
+						  gap="20"/>
+	</s:layout>
+	<s:Button label="Acquire" id="acquireButton"
+			  click="acquireButton_clickHandler(event)"/>
+	<s:Button label="Release" id="releaseButton"
+			  click="releaseButton_clickHandler(event)"/>
+	<s:Button label="Is Held" id="isHeldButton"
+			  click="isHeldButton_clickHandler(event)"/>
+	<s:Button label="Go To Sleep" id="goToSleepButton"
+			  click="goToSleepButton_clickHandler(event)"/>
+	<s:Button label="Is Screen On" id="isScreenOnButton"
+			  click="isScreenOnButton_clickHandler(event)"/>
+	<s:Button label="Keep Screen On" id="keepScreenOnButton"
+			  click="keepScreenOnButton_clickHandler(event)"/>
+	<s:Button label="Get Screen Timeout" id="getScreenTimeoutButton"
+			  click="getScreenTimeoutButton_clickHandler(event)"/>
+	<s:Button label="Set Screen Timeout" id="setScreenTimeoutButton"
+			  click="setScreenTimeoutButton_clickHandler(event)"/>
+	<s:Button label="Reset Screen Timeout" id="resetScreenTimeoutButton"
+			  click="resetScreenTimeoutButton_clickHandler(event)"/>
+	<s:Button label="Zero Screen Timeout" id="zeroScreenTimeoutButton"
+			  click="zeroScreenTimeoutButton_clickHandler(event)"/>
+</s:Application>

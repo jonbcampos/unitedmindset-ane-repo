@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   creationComplete="application1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.unitedmindset.extensions.vibration.Vibration;
+			
+			import mx.events.FlexEvent;
+			
+			private var _ane:Vibration;
+			
+			protected function vibrateButton_clickHandler(event:MouseEvent):void
+			{
+				_ane = new Vibration();
+				_ane.register();
+				if(_ane.isSupported())
+					_ane.vibrate(1000);
+				_ane.deregister();
+				_ane = null;
+			}
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				/*
+				_ane = new Vibration();
+				_ane.register();
+				*/
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Button label="Vibrate" id="vibrateButton"
+			  click="vibrateButton_clickHandler(event)"/>
+</s:Application>

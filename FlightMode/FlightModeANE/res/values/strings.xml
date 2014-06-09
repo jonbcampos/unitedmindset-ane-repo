@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="hello">Hello World, FlightModeANEActivity!</string>
-    <string name="app_name">FlightModeANE</string>
-    <string name="header_label">Flight Mode Indicator</string>
-    <string name="toggle_button_label">Airplane Mode</string>
-
-</resources>

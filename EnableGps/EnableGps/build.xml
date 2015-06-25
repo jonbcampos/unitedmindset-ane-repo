@@ -13,6 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 <project name="Build File" basedir="." default="build">
 
 	<property file="build.properties"/>
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_TASKS}" />
 	
 	<path id="ane.classpath">
 		<pathelement location="${ANDROID_DIR}/src"/>
@@ -23,13 +24,67 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	</path>
 	
 	<target name="build">
-		
 		<!-- prep files -->
+		<antcall target="-prep"/>
+		<antcall target="-compile-default"/>
+		<antcall target="-compile-swc"/>
+		<antcall target="-move-files"/>
+		<!-- make cert if necessary -->
+		<available file="${KEYSTORE}" property="CERTIFICATE_EXISTS"/>
+		<antcall target="-certificate"/>
+		<!-- ready to package -->
+		<antcall target="-package"/>
+		<!--
+		<antcall target="-cleanup"/>
+		-->
+	</target>
+	
+	<target name="-compile-default">
+		<compc debug="false" output="${RELEASE_DIR}/${ANE_NAME}Default.swc">
+			<load-config filename="${FLEX_HOME}/frameworks/airmobile-config.xml" />
+			<source-path path-element="${DEFAULT_SRC}"/>
+			<include-sources dir="${DEFAULT_SRC}" includes="*"/>
+			<swf-version>16</swf-version>
+		</compc>
+	</target>
+	
+	<target name="-compile-swc">
+		<compc debug="false" output="${RELEASE_DIR}/${ANE_NAME}.swc">
+			<load-config filename="${FLEX_HOME}/frameworks/airmobile-config.xml" />
+			<source-path path-element="src"/>
+			<include-sources dir="src" includes="*"/>
+			<swf-version>16</swf-version>
+		</compc>
+	</target>
+	
+	<target name="-package">
+		<exec executable="${ADT}">
+			<arg line="-package"/>
+			<arg line="-storetype ${STORETYPE}"/>
+			<arg line="-keystore ${KEYSTORE}"/>
+			<arg line="-storepass ${STOREPASS}"/>
+			<arg line="-target ane ${RELEASE_DIR}/${ANE_NAME}.ane ${EXT}"/>
+			<arg line="-swc ${RELEASE_DIR}/${ANE_NAME}.swc"/>
+			<arg line="-platform Android-ARM -C ${ANDROID_STORAGE} library.swf ${ANE_NAME}.jar"/>
+			<arg line="-platform default -C ${DEFAULT_STORAGE} library.swf"/>
+		</exec>
+	</target>
+	
+	<target name="-move-files">
+		<!-- unzip swcs -->
+		<unzip dest="${ANDROID_STORAGE}" src="${RELEASE_DIR}/${ANE_NAME}.swc"/>
+		<unzip dest="${DEFAULT_STORAGE}" src="${RELEASE_DIR}/${ANE_NAME}Default.swc"/>
+	</target>
+	
+	<target name="-prep">
 		<delete dir="${ANDROID_STORAGE}" includeemptydirs="true"/>
 		<mkdir dir="${ANDROID_STORAGE}"/>
 		
 		<delete dir="${DEFAULT_STORAGE}" includeemptydirs="true"/>
 		<mkdir dir="${DEFAULT_STORAGE}"/>
+		
+		<delete dir="${RELEASE_DIR}" includeemptydirs="true"/>
+		<mkdir dir="${RELEASE_DIR}"/>
 		
 		<!--
 		<antcall target="-build-jar"/>
@@ -37,45 +92,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 		<copy file="${ANE_MAIN}/${ANE_NAME}-Master.jar" 
 			tofile="${ANDROID_STORAGE}/${ANE_NAME}.jar"
 			overwrite="true"/>
-		
-		<!-- prep android dependencies -->
-		<unzip dest="${ANDROID_STORAGE}" src="${SWC}"/>
-		
-		<!-- prep default -->
-		<unzip dest="${DEFAULT_STORAGE}" src="${DEFAULT_BIN}/${DEFAULT_SWC}"/>
-		
-		<!-- clear release files -->
-		<delete dir="${RELEASE_DIR}" includeemptydirs="true"/>
-		<mkdir dir="${RELEASE_DIR}"/>
-		
-		<!-- make cert if necessary -->
-		<available file="${KEYSTORE}" property="CERTIFICATE_EXISTS"/>
-		<antcall target="-certificate"/>
-		
-		<!-- package ane -->
-		<exec executable="${ADT}">
-			<arg line="-package"/>
-			<arg line="-storetype ${STORETYPE}"/>
-			<arg line="-keystore ${KEYSTORE}"/>
-			<arg line="-storepass ${STOREPASS}"/>
-            <arg line="-tsa none"/>
-			<arg line="-target ane ${RELEASE_DIR}/${ANE_NAME}.ane"/>
-			<arg line="${EXT} -swc ${SWC}"/>
-			<arg line="-platform Android-ARM -C ${ANDROID_STORAGE} ."/>
-			<arg line="-platform default -C ${DEFAULT_STORAGE} library.swf"/>
-		</exec>
-		
-		<!-- cleanup -->
+	</target>
+	
+	<target name="-cleanup">
 		<delete dir="${ANDROID_STORAGE}" includeemptydirs="true"/>
 		<delete dir="${DEFAULT_STORAGE}" includeemptydirs="true"/>
-		
-		<!-- 
-			move to app;
-			add this section only if you want.
-			Helpful during testing. 
-		-->
-		<copy todir="${APP_ANES}" file="${RELEASE_DIR}/${ANE_NAME}.ane" overwrite="true"/>
-		
 	</target>
 	
 	<target name="-build-jar">

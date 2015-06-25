@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.14.1" build="20150325" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="_c716960f620abce4b14cad536a95398038f9c11ff5d2f8dbc3c9aad35df2aec0_flash_display_Sprite" mod="1432690093535" signatureChecksum="2791799907" >
+        <def id="_c716960f620abce4b14cad536a95398038f9c11ff5d2f8dbc3c9aad35df2aec0_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="com/unitedmindset/extensions/opendocument/OpenDocument" mod="1402328025000" signatureChecksum="2420078332" >
+        <def id="com.unitedmindset.extensions.opendocument:OpenDocument" /> 
+        <dep id="flash.net:URLRequest" type="e" /> 
+        <dep id="flash.net:navigateToURL" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="a650fa39d342114c5ff95b91fe2c918f3711905ddc1ff9c41decd0a373cea53b"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>

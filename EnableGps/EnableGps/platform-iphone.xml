@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<platform xmlns="http://ns.adobe.com/air/extension/17.0">
+	<description>iOS native library to allow AIR application to EnableGps</description>
+	<copyright>Copyright (c) 2011 - 2015 SmartSystems</copyright>
+	<linkerOptions>
+		<option>-ios_version_min 4.3</option>
+	</linkerOptions>
+</platform>

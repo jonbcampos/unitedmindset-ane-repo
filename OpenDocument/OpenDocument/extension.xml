@@ -24,15 +24,14 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 -->
-<extension xmlns="http://ns.adobe.com/air/extension/3.1">
+<extension xmlns="http://ns.adobe.com/air/extension/3.3">
 	<id>com.unitedmindset.extensions.OpenDocument</id>
-	<versionNumber>1.0.0</versionNumber>
+	<versionNumber>1.0.1</versionNumber>
 	<platforms>
 		<platform name="Android-ARM">
 			<applicationDeployment>
 				<nativeLibrary>OpenDocument.jar</nativeLibrary>
 				<initializer>com.unitedmindset.opendocument.extensions.OpenDocumentExtension</initializer>
-				<finalizer>com.unitedmindset.opendocument.extensions.OpenDocumentExtension</finalizer>
 			</applicationDeployment>
 		</platform>
 		<platform name="default">

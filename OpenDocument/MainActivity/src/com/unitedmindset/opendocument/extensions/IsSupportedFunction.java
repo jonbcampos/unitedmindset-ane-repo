@@ -1,4 +1,4 @@
-<!--
+/*
 
 Copyright (C) 2012 Jonathan Campos
 
@@ -23,20 +23,27 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
 OTHER DEALINGS IN THE SOFTWARE.
 
--->
-<extension xmlns="http://ns.adobe.com/air/extension/3.1">
-	<id>com.unitedmindset.extensions.EnableGps</id>
-	<versionNumber>1.0.0</versionNumber>
-	<platforms>
-		<platform name="Android-ARM">
-			<applicationDeployment>
-				<nativeLibrary>EnableGps.jar</nativeLibrary>
-				<initializer>com.unitedmindset.enablegps.extensions.EnableGpsExtension</initializer>
-				<finalizer>com.unitedmindset.enablegps.extensions.EnableGpsExtension</finalizer>
-			</applicationDeployment>
-		</platform>
-		<platform name="default">
-			<applicationDeployment/>
-       </platform>
-	</platforms>
-</extension>
+*/
+package com.unitedmindset.opendocument.extensions;
+
+import com.adobe.fre.FREContext;
+import com.adobe.fre.FREFunction;
+import com.adobe.fre.FREObject;
+import com.adobe.fre.FREWrongThreadException;
+
+public class IsSupportedFunction implements FREFunction {
+
+	public FREObject call(FREContext arg0, FREObject[] arg1) {
+		
+		FREObject result = null;
+		try {
+			result = FREObject.newObject(true);
+		} catch (FREWrongThreadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+}

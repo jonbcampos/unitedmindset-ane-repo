@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.14.1" build="20150325" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="_77bc1f01905ebe424af971fa778befc48deace88d71cecd3d9d8914bafc2f07a_flash_display_Sprite" mod="1432677318140" signatureChecksum="2758311345" >
+        <def id="_77bc1f01905ebe424af971fa778befc48deace88d71cecd3d9d8914bafc2f07a_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="com/unitedmindset/extensions/enablegps/EnableGps" mod="1402328025000" signatureChecksum="919690029" >
+        <def id="com.unitedmindset.extensions.enablegps:EnableGps" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="609ff9c442945993cd8be5de0a591dbc7a83714411ec222b664fb6c3eb8f9859"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>
